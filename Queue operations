@@ -67,7 +67,7 @@ void insert()
 }
 void delete()
 {
-    if(front==-1)
+    if(front==-1||front>rear)
     {
         printf("queue underflow");
         
