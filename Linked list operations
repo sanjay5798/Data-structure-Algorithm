@@ -1,0 +1,213 @@
+#include <stdio.h>
+#include<stdlib.h>
+struct node
+{
+   int data;
+   struct node *next;
+};
+struct node *start=NULL;
+struct node *create(struct node *);
+struct node *traverse(struct node *);
+struct node *insert_at_beg(struct node *);
+struct node *insert_at_end(struct node *);
+struct node *insert_at_position(struct node *);
+struct node *delete_at_beg(struct node *);
+struct node *delete_at_end(struct node *);
+struct node *delete_at_position(struct node *);
+int main()
+{
+    int choice;
+    do{
+        printf("\n1.Enter 1 to create a link list.\n2.Enter 2 to traverse a link list.\n3.Enter 3 to insert at begining.\n4.Enter 4 to insert at end.\n5.Enter 5 to insert at given position.\n6.Enter 6 to delete at begining.\n7.Enter 7 to delete at end.\n8.Enter 8 to delete at given position\n");
+        printf("Enter your choice:");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:
+                    start=create(start);
+                    printf("\nlink list is created");
+                    break;
+            case 2:
+                    printf("\nThe elements of the link list are:\t");
+                    start=traverse(start);
+                    break;
+            case 3:
+                    start=insert_at_beg(start);
+                    break;
+            case 4:
+                    start=insert_at_end(start);
+                    break;
+            case 5:
+                    start=insert_at_position(start);
+                    break;
+            case 6:
+                    start=delete_at_beg(start);
+                    break;
+            case 7:
+                    start=delete_at_end(start);
+                    break;
+            case 8:
+                    start=delete_at_position(start);
+                    break;
+                    
+                    
+        }
+        
+        
+    }while(choice!=0);
+    
+}
+struct node *create(struct node *start)
+{
+    struct node *ptr,*new_node;
+    int num;
+    printf("\nEnter -1 to exit:");
+    printf("\nEnter the data:");
+    scanf("%d",&num);
+    while(num!=-1)
+    {
+        new_node=(struct node *)malloc(sizeof(struct node));
+        new_node->data=num;
+        
+        if(start==NULL)
+        {
+            start=new_node;
+            new_node->next=NULL;
+        }
+        else
+        {
+            ptr=start;
+            while(ptr->next!=NULL)
+            {
+                ptr=ptr->next;
+            }
+            ptr->next=new_node;
+            new_node->next=NULL;
+        }
+        printf("\nEnter -1 to exit:");
+        printf("\nEnter the data:");
+        scanf("%d",&num);
+        
+    }
+    return start;
+}
+struct node *traverse(struct node *start)
+{
+    struct node *ptr;
+    ptr=start;
+    while(ptr!=NULL)
+    {
+        if(ptr==start)
+        {
+            printf("%d\t",ptr->data);
+            ptr=ptr->next;
+        }
+        else
+        {
+            printf("%d\t",ptr->data);
+            ptr=ptr->next;
+        }
+        
+    }
+    return start;
+}
+
+struct node *insert_at_beg(struct node *start)
+{
+    struct node *new_node;
+    int num;
+    new_node=(struct node *)malloc(sizeof(struct node));
+    printf("\nEnter the data:");
+    scanf("%d",&num);
+    new_node->data=num;
+    new_node->next=start;
+    start=new_node;
+    printf("\nNode is created");
+    return start;
+}
+
+struct node *insert_at_end(struct node *start)
+{
+    struct node *new_node,*ptr;
+    int num;
+    new_node=(struct node *)malloc(sizeof(struct node));
+    printf("\nEnter the data:");
+    scanf("%d",&num);
+    new_node->data=num;
+    ptr=start;
+    while(ptr->next!=NULL)
+    {
+        ptr=ptr->next;
+    }
+    ptr->next=new_node;
+    new_node->next=NULL;
+    printf("\nNode is created");
+    
+    
+    return start;
+}
+
+struct node *insert_at_position(struct node *start)
+{
+    int k=1,position,num;
+    struct node *new_node,*ptr;
+    printf("\nIn which position you want to add a node:");
+    scanf("%d",&position);
+    new_node=(struct node *)malloc(sizeof(struct node));
+    printf("\nEnter the data:");
+    scanf("%d",&num);
+    new_node->data=num;
+    ptr=start;
+    while(k<position-1)
+    {
+        ptr=ptr->next;
+        k++;
+    }
+    new_node->next=ptr->next;
+    ptr->next=new_node;
+    printf("\nNode is created");
+    
+    return start;
+}
+
+struct node *delete_at_beg(struct node *start)
+{
+    start=start->next;
+    printf("\nNode is deleted");
+    
+    return start;
+}
+
+struct node *delete_at_end(struct node *start)
+{
+    struct node *preptr,*ptr;
+    ptr=start;
+    while(ptr->next!=NULL)
+    {
+        preptr=ptr;
+        ptr=ptr->next;
+    }
+    preptr->next=NULL;
+    printf("\nNode is deleted");
+    
+    return start;
+}
+
+struct node *delete_at_position(struct node *start)
+{
+    int k=0,position;
+    struct node *preptr,*ptr;
+    printf("\nIn which position you want to delete a node:");
+    scanf("%d",&position);
+    ptr=start;
+    while(k<position-1)
+    {
+        preptr=ptr; 
+        ptr=ptr->next;
+        k++;
+    }
+    preptr->next=ptr->next;
+    printf("\nNode is deleted");
+    
+    return start;
+}
