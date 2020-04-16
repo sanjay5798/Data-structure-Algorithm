@@ -1,3 +1,5 @@
+//1. "struct employee" is data type.
+//2. typedef is used to alias the data type "struct employee" into "emp".
 #include <stdio.h>
 typedef struct 
 {
