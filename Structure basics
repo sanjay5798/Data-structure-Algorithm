@@ -1,6 +1,7 @@
 //1. "struct employee" is data type.
 //2. typedef is used to alias the data type "struct employee" into "emp".
 #include <stdio.h>
+#pragma pack(1)
 typedef struct 
 {
     char name[20];
@@ -13,6 +14,7 @@ int main()
     int i;
     emp e[3];
     //={{"sanjay",2000},{"aakash",2001},{"pathikrit",2002}};
+    //n=sizeof(e);
     for(i=0;i<3;i++)
     {
         scanf("%s%d",&e[i].name,&e[i].id);
